@@ -67,7 +67,8 @@ public class K9botTeleopTank_Linear extends LinearOpMode {
         double rightfront;
         double collector;
         double leftfront;
-
+        double rightside;
+        double leftside;
 
         /* Initialize the hardware variables.
          * The init() method of the hardware class does all the work here
@@ -85,16 +86,37 @@ public class K9botTeleopTank_Linear extends LinearOpMode {
         while (opModeIsActive()) {
 
             // Run wheels in tank mode (note: The joystick goes negative when pushed forwards, so negate it)
+            rightside = gamepad1.left_stick_x;
             leftback = -gamepad1.left_stick_y;
-            rightfront = -gamepad1.right_stick_y;
-            rightback = -gamepad1.right_stick_y;
-            leftfront = gamepad1.left_stick_y;
+            rightfront = gamepad1.right_stick_y;
+            rightback = gamepad1.right_stick_y;
+            leftfront = -gamepad1.left_stick_y;
             collector = -gamepad2.left_stick_y;
+            float together = -(gamepad2.right_trigger - gamepad2.left_trigger);
+            robot.collector.setPower(collector);
             rightfront = Range.clip(rightfront,-1,1);
             leftfront = Range.clip(leftfront,-1,1);
             leftback = Range.clip(leftback,-1,1);
             rightback = Range.clip(rightback,-1,1);
+            rightside = Range.clip(rightside, -1,1);
 
+
+            if(gamepad1.x) {
+
+
+                robot.rightBackMotor.setPower(-rightside);
+                robot.leftbackMotor.setPower(-rightside);
+                robot.rightFrontMotor.setPower(rightside);
+                robot.leftFrontMotor.setPower(rightside);
+            }
+            else
+            {
+                robot.rightBackMotor.setPower(rightback);
+                robot.leftbackMotor.setPower(leftback);
+                robot.rightFrontMotor.setPower(rightfront);
+                robot.leftFrontMotor.setPower(leftfront);
+
+            }
             // Use gamepad Y & A raise and lower the arm
           /*  if (gamepad1.a)
                 armPosition += ARM_SPEED;
@@ -116,10 +138,11 @@ public class K9botTeleopTank_Linear extends LinearOpMode {
             // Send telemetry message to signify robot running;
             //telemetry.addData("arm",   "%.2f", armPosition);
            // telemetry.addData("claw",  "%.2f", clawPosition);
+            telemetry.addData("rightback",  "%.2f", rightback);
             telemetry.addData("leftback",  "%.2f", leftback);
-            telemetry.addData("rightback", "%.2f", rightback);
-            telemetry.addData("rightback", "%.2f", rightback);
-            telemetry.update();
+          telemetry.addData("rightfront", "%.2f", rightfront);
+           telemetry.addData("leftfront", "%.2f", leftfront);
+          telemetry.update();
 
             // Pause for metronome tick.  40 mS each cycle = update 25 times a second.
             robot.waitForTick(40);
