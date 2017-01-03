@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.robotcontroller.external.samples;
 
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -31,7 +32,11 @@ public class HardwareK9bot
     public DcMotor leftFrontMotor = null;
     public DcMotor rightFrontMotor = null;
     public DcMotor collector = null;
-
+    public DcMotor shooterleft = null;
+    public DcMotor shooterright = null;
+    public DcMotor capball = null;
+  //  private ColorSensor colorSensor;
+  //  private float[] hsv = {0F, 0F,0F};
 
     /* Local OpMode members. */
     HardwareMap hwMap  = null;
@@ -42,21 +47,29 @@ public class HardwareK9bot
     }
 
     /* Initialize standard Hardware interfaces */
-    public void init(HardwareMap ahwMap) {
+    public void init(HardwareMap hwMap) {
         // save reference to HW Map
         hwMap = hwMap;
 
         // Define and Initialize Motors
-        leftbackMotor   = hwMap.dcMotor.get("leftback");
-        rightBackMotor = hwMap.dcMotor.get("rightback");
-        leftFrontMotor = hwMap.dcMotor.get("leftfront");
-        rightFrontMotor = hwMap.dcMotor.get("rightfront");
-        // Set all motors to zero power
+        leftbackMotor   = hwMap.dcMotor.get("leftback_drive");
+        rightBackMotor = hwMap.dcMotor.get("rightback_drive");
+        leftFrontMotor = hwMap.dcMotor.get("leftfront_drive");
+        rightFrontMotor = hwMap.dcMotor.get("rightfront_drive");
+        collector = hwMap.dcMotor.get("collector");
+        shooterright = hwMap.dcMotor.get("shooterright");
+        shooterleft = hwMap.dcMotor.get("shooterleft");
+        capball = hwMap.dcMotor.get("capball");
+
+       // colorSensor = hwMap.colorSensor.get("color");
         leftbackMotor.setPower(0);
         rightBackMotor.setPower(0);
         leftFrontMotor.setPower(0);
         rightFrontMotor.setPower(0);
         collector.setPower(0);
+        shooterleft.setPower(0);
+        shooterright.setPower(0);
+        capball.setPower(0);
 
 
 
@@ -67,6 +80,9 @@ public class HardwareK9bot
         rightFrontMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightBackMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         collector.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        shooterright.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        shooterleft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        capball.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // Define and initialize ALL installed servos.
     }
