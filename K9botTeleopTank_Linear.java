@@ -68,7 +68,8 @@ public class K9botTeleopTank_Linear extends LinearOpMode {
         double collector;
         double leftfront;
         double rightside;
-        double leftside;
+        double shooterleft;
+        double shooterright;
 
         /* Initialize the hardware variables.
          * The init() method of the hardware class does all the work here
@@ -92,13 +93,22 @@ public class K9botTeleopTank_Linear extends LinearOpMode {
             rightback = gamepad1.right_stick_y;
             leftfront = -gamepad1.left_stick_y;
             collector = -gamepad2.left_stick_y;
-            float together = -(gamepad2.right_trigger - gamepad2.left_trigger);
+            shooterleft = gamepad2.right_stick_y;
+            shooterright= -gamepad2.right_stick_y;
+            double capball = -(gamepad2.right_trigger - gamepad2.left_trigger);
             robot.collector.setPower(collector);
+            robot.capball.setPower(capball);
+            robot.shooterleft.setPower(shooterleft);
+            robot.shooterright.setPower(shooterright);
+
             rightfront = Range.clip(rightfront,-1,1);
             leftfront = Range.clip(leftfront,-1,1);
             leftback = Range.clip(leftback,-1,1);
             rightback = Range.clip(rightback,-1,1);
             rightside = Range.clip(rightside, -1,1);
+            shooterleft= Range.clip(shooterleft, -1,1);
+            shooterright= Range.clip(shooterright, -1,1);
+            capball =  Range.clip(shooterleft, -1,1);
 
 
             if(gamepad1.x) {
