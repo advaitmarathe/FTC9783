@@ -73,7 +73,7 @@ public class PushbotAutoDriveByTime_Linear extends LinearOpMode {
     static final double     TURN_SPEED    = 0.5;
 
     @Override
-    public void runOpMode() {
+    public void runOpMode() throws InterruptedException{
 
         /*
          * Initialize the drive system variables.
@@ -89,9 +89,8 @@ public class PushbotAutoDriveByTime_Linear extends LinearOpMode {
         waitForStart();
 
         // Step through each leg of the path, ensuring that the Auto mode has not been stopped along the way
-
+        robot.colorSensor.enableLed(false);
         // Step 1:  Drive forward for 3 seconds
-
         //rightfront positive is backward
         //leftback positive is forward
         //leftfront positive is forward
@@ -133,7 +132,7 @@ public class PushbotAutoDriveByTime_Linear extends LinearOpMode {
         robot.shooterright.setPower(0);
         robot.shooterleft.setPower(0);
         runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 0.7)) {
+        while (opModeIsActive() && (runtime.seconds() < 0.8)) {
             telemetry.addData("Path", "Leg 3: %2.5f S Elapsed", runtime.seconds());
             telemetry.update();
         }
@@ -159,8 +158,8 @@ public class PushbotAutoDriveByTime_Linear extends LinearOpMode {
         robot.shooterright.setPower(0);
         robot.shooterleft.setPower(0);
         runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 1.68)) {
-            telemetry.addData("Path", "Leg 4: %2.5f S Elapsed", runtime.seconds());
+        while (opModeIsActive() && (runtime.seconds() < 1.7)) {
+            telemetry.addData("Path", "Leg 5: %2.5f S Elapsed", runtime.seconds());
             telemetry.update();
         }
         robot.leftbackMotor.setPower(0);
@@ -172,8 +171,59 @@ public class PushbotAutoDriveByTime_Linear extends LinearOpMode {
         robot.shooterright.setPower(0);
         robot.shooterleft.setPower(0);
         runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 1.575)) {
-            telemetry.addData("Path", "Leg 5: %2.5f S Elapsed", runtime.seconds());
+        while (opModeIsActive() && (runtime.seconds() < 2.4)) {
+            telemetry.addData("Path", "Leg 6: %2.5f S Elapsed", runtime.seconds());
+            telemetry.update();
+        }
+        /*robot.leftbackMotor.setPower(-FORWARD_SPEED);
+        robot.rightBackMotor.setPower(FORWARD_SPEED);
+        robot.leftFrontMotor.setPower(-FORWARD_SPEED);
+        robot.rightFrontMotor.setPower(FORWARD_SPEED);
+        robot.capball.setPower(0);
+        robot.collector.setPower(0);
+        robot.shooterright.setPower(0);
+        robot.shooterleft.setPower(0);
+        runtime.reset();*/
+          /*  robot.leftbackMotor.setPower(-FORWARD_SPEED);
+            robot.rightBackMotor.setPower(FORWARD_SPEED);
+            robot.leftFrontMotor.setPower(-FORWARD_SPEED);
+            robot.rightFrontMotor.setPower(FORWARD_SPEED);
+            robot.capball.setPower(0);
+            robot.collector.setPower(0);
+            robot.shooterright.setPower(0);
+            robot.shooterleft.setPower(0);
+            while (opModeIsActive() && (robot.colorSensor.blue()>robot.colorSensor.red())) {
+            telemetry.addData("Path", "Leg 7: %2.5f S Elapsed", robot.colorSensor.red(),robot.colorSensor.blue());
+            telemetry.update();
+        }*/
+        robot.leftbackMotor.setPower(-FORWARD_SPEED);
+        robot.rightBackMotor.setPower(FORWARD_SPEED);
+        robot.leftFrontMotor.setPower(-FORWARD_SPEED);
+        robot.rightFrontMotor.setPower(FORWARD_SPEED);
+        if(robot.colorSensor.blue() > robot.colorSensor.red())
+        {
+            robot.shooterleft.setPower(0.6);
+        }else if(robot.colorSensor.red() > robot.colorSensor.blue())
+        {
+            robot.shooterright.setPower(0.7);
+        }
+        while (opModeIsActive()) {
+            telemetry.addData("Path", "Leg 7: %2.5f S Elapsed", runtime.seconds());
+            telemetry.update();
+        }
+
+
+        robot.leftbackMotor.setPower(0);
+        robot.rightBackMotor.setPower(0);
+        robot.rightFrontMotor.setPower(0);
+        robot.leftFrontMotor.setPower(0);
+        robot.capball.setPower(0);
+        robot.collector.setPower(0.9);
+        robot.shooterright.setPower(-0.9);
+        robot.shooterleft.setPower(0.9);
+        runtime.reset();
+        while (opModeIsActive() && (runtime.seconds() < 5)) {
+            telemetry.addData("Path", "Leg 8: %2.5f S Elapsed", runtime.seconds());
             telemetry.update();
         }
 
