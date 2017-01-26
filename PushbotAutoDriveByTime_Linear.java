@@ -38,6 +38,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.LightSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.ColorSensor;
+import android.graphics.Color;
 
 /**
  * This file illustrates the concept of driving a path based on time.
@@ -68,18 +69,23 @@ public class PushbotAutoDriveByTime_Linear extends LinearOpMode {
     HardwareK9bot         robot   = new HardwareK9bot();   // Use a Pushbot's hardware
     private ElapsedTime     runtime = new ElapsedTime();
 
-
     static final double     FORWARD_SPEED = 0.6;
     static final double     TURN_SPEED    = 0.5;
 
     @Override
     public void runOpMode() throws InterruptedException{
 
+        robot.init(hardwareMap);
         /*
          * Initialize the drive system variables.
          * The init() method of the hardware class does all the work here
          */
-        robot.init(hardwareMap);
+        float hsvValues[] = {0F,0F,0F};
+        final float values[] = hsvValues;
+        robot.colorSensor.enableLed(false);
+        Color.RGBToHSV(robot.colorSensor.red() * 8, robot.colorSensor.green() * 8, robot.colorSensor.blue() * 8 , hsvValues);
+
+
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Ready to run");    //
@@ -89,92 +95,6 @@ public class PushbotAutoDriveByTime_Linear extends LinearOpMode {
         waitForStart();
 
         // Step through each leg of the path, ensuring that the Auto mode has not been stopped along the way
-        robot.colorSensor.enableLed(false);
-        // Step 1:  Drive forward for 3 seconds
-        //rightfront positive is backward
-        //leftback positive is forward
-        //leftfront positive is forward
-        //rightback positive is backward
-        robot.leftbackMotor.setPower(-FORWARD_SPEED);
-        robot.rightBackMotor.setPower(FORWARD_SPEED);
-        robot.leftFrontMotor.setPower(-FORWARD_SPEED);
-        robot.rightFrontMotor.setPower(FORWARD_SPEED);
-        robot.capball.setPower(0);
-        robot.collector.setPower(0);
-        robot.shooterright.setPower(0);
-        robot.shooterleft.setPower(0);
-        runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 0.75)) {
-            telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
-            telemetry.update();
-        }
-
-       // Step 2:  Spin right for 1.3 seconds
-       robot.leftbackMotor.setPower(0);
-        robot.rightBackMotor.setPower(0);
-        robot.rightFrontMotor.setPower(0);
-        robot.leftFrontMotor.setPower(0);
-        robot.capball.setPower(0);
-        robot.collector.setPower(0.9);
-        robot.shooterright.setPower(-0.9);
-        robot.shooterleft.setPower(0.9);
-        runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 1)) {
-            telemetry.addData("Path", "Leg 2: %2.5f S Elapsed", runtime.seconds());
-            telemetry.update();
-        }
-        robot.leftbackMotor.setPower(-FORWARD_SPEED);
-        robot.rightBackMotor.setPower(FORWARD_SPEED);
-        robot.leftFrontMotor.setPower(-FORWARD_SPEED);
-        robot.rightFrontMotor.setPower(FORWARD_SPEED);
-        robot.capball.setPower(0);
-        robot.collector.setPower(0);
-        robot.shooterright.setPower(0);
-        robot.shooterleft.setPower(0);
-        runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 0.8)) {
-            telemetry.addData("Path", "Leg 3: %2.5f S Elapsed", runtime.seconds());
-            telemetry.update();
-        }
-        robot.leftbackMotor.setPower(-FORWARD_SPEED);
-        robot.rightBackMotor.setPower(-FORWARD_SPEED);
-        robot.leftFrontMotor.setPower(-FORWARD_SPEED);
-        robot.rightFrontMotor.setPower(-FORWARD_SPEED);
-        robot.capball.setPower(0);
-        robot.collector.setPower(0);
-        robot.shooterright.setPower(0);
-        robot.shooterleft.setPower(0);
-        runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 1.3)) {
-            telemetry.addData("Path", "Leg 4: %2.5f S Elapsed", runtime.seconds());
-            telemetry.update();
-        }
-        robot.leftbackMotor.setPower(-FORWARD_SPEED);
-        robot.rightBackMotor.setPower(FORWARD_SPEED);
-        robot.leftFrontMotor.setPower(-FORWARD_SPEED);
-        robot.rightFrontMotor.setPower(FORWARD_SPEED);
-        robot.capball.setPower(0);
-        robot.collector.setPower(0);
-        robot.shooterright.setPower(0);
-        robot.shooterleft.setPower(0);
-        runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 1.7)) {
-            telemetry.addData("Path", "Leg 5: %2.5f S Elapsed", runtime.seconds());
-            telemetry.update();
-        }
-        robot.leftbackMotor.setPower(0);
-        robot.rightBackMotor.setPower(FORWARD_SPEED);
-        robot.leftFrontMotor.setPower(0);
-        robot.rightFrontMotor.setPower(FORWARD_SPEED);
-        robot.capball.setPower(0);
-        robot.collector.setPower(0);
-        robot.shooterright.setPower(0);
-        robot.shooterleft.setPower(0);
-        runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 2.4)) {
-            telemetry.addData("Path", "Leg 6: %2.5f S Elapsed", runtime.seconds());
-            telemetry.update();
-        }
         /*robot.leftbackMotor.setPower(-FORWARD_SPEED);
         robot.rightBackMotor.setPower(FORWARD_SPEED);
         robot.leftFrontMotor.setPower(-FORWARD_SPEED);
@@ -183,52 +103,77 @@ public class PushbotAutoDriveByTime_Linear extends LinearOpMode {
         robot.collector.setPower(0);
         robot.shooterright.setPower(0);
         robot.shooterleft.setPower(0);
-        runtime.reset();*/
-          /*  robot.leftbackMotor.setPower(-FORWARD_SPEED);
-            robot.rightBackMotor.setPower(FORWARD_SPEED);
-            robot.leftFrontMotor.setPower(-FORWARD_SPEED);
-            robot.rightFrontMotor.setPower(FORWARD_SPEED);
-            robot.capball.setPower(0);
-            robot.collector.setPower(0);
-            robot.shooterright.setPower(0);
-            robot.shooterleft.setPower(0);
-            while (opModeIsActive() && (robot.colorSensor.blue()>robot.colorSensor.red())) {
-            telemetry.addData("Path", "Leg 7: %2.5f S Elapsed", robot.colorSensor.red(),robot.colorSensor.blue());
-            telemetry.update();
-        }*/
-        robot.leftbackMotor.setPower(-FORWARD_SPEED);
-        robot.rightBackMotor.setPower(FORWARD_SPEED);
-        robot.leftFrontMotor.setPower(-FORWARD_SPEED);
-        robot.rightFrontMotor.setPower(FORWARD_SPEED);
-        if(robot.colorSensor.blue() > robot.colorSensor.red())
-        {
-            robot.shooterleft.setPower(0.6);
-        }else if(robot.colorSensor.red() > robot.colorSensor.blue())
-        {
-            robot.shooterright.setPower(0.7);
-        }
-        while (opModeIsActive()) {
-            telemetry.addData("Path", "Leg 7: %2.5f S Elapsed", runtime.seconds());
-            telemetry.update();
-        }
-
-
+        Thread.sleep(750);
         robot.leftbackMotor.setPower(0);
         robot.rightBackMotor.setPower(0);
         robot.rightFrontMotor.setPower(0);
         robot.leftFrontMotor.setPower(0);
         robot.capball.setPower(0);
-        robot.collector.setPower(0.9);
-        robot.shooterright.setPower(-0.9);
-        robot.shooterleft.setPower(0.9);
-        runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 5)) {
-            telemetry.addData("Path", "Leg 8: %2.5f S Elapsed", runtime.seconds());
-            telemetry.update();
-        }
+        robot.collector.setPower(1);
+        robot.shooterright.setPower(1);
+        robot.shooterleft.setPower(1);
+        Thread.sleep(1500);
+        robot.leftbackMotor.setPower(-FORWARD_SPEED);
+        robot.rightBackMotor.setPower(FORWARD_SPEED);
+        robot.leftFrontMotor.setPower(-FORWARD_SPEED);
+        robot.rightFrontMotor.setPower(FORWARD_SPEED);
+        robot.capball.setPower(0);
+        robot.collector.setPower(0);
+        robot.shooterright.setPower(0);
+        robot.shooterleft.setPower(0);
+        Thread.sleep(800);
+        robot.leftbackMotor.setPower(-FORWARD_SPEED);
+        robot.rightBackMotor.setPower(-FORWARD_SPEED);
+        robot.leftFrontMotor.setPower(-FORWARD_SPEED);
+        robot.rightFrontMotor.setPower(-FORWARD_SPEED);
+        robot.capball.setPower(0);
+        robot.collector.setPower(0);
+        robot.shooterright.setPower(0);
+        robot.shooterleft.setPower(0);*/
+        while(robot.colorSensor.blue()<2)
+            //robot.colorSensor.red()<3
+        {
+        robot.leftbackMotor.setPower(-FORWARD_SPEED);
+        robot.rightBackMotor.setPower(FORWARD_SPEED);
+        robot.leftFrontMotor.setPower(-FORWARD_SPEED);
+        robot.rightFrontMotor.setPower(FORWARD_SPEED);
+        robot.capball.setPower(0);
+        robot.collector.setPower(0);
+        robot.shooterright.setPower(0);
+        robot.shooterleft.setPower(0);
 
-        telemetry.addData("Path", "Complete");
-        telemetry.update();
+
+
+           /* if (robot.colorSensor.red() > robot.colorSensor.blue() && robot.colorSensor.red() > robot.colorSensor.green()) {
+                robot.leftbackMotor.setPower(0);
+                robot.rightBackMotor.setPower(0);
+                robot.leftFrontMotor.setPower(0);
+                robot.rightFrontMotor.setPower(0);
+                robot.capball.setPower(0);
+                robot.collector.setPower(0);
+                robot.shooterright.setPower(0);
+                robot.shooterleft.setPower(0);*/
+
+        }
+        robot.rightFrontMotor.setPower(0.3);
+        robot.rightBackMotor.setPower(-0.3);
+        robot.leftFrontMotor.setPower(0.3);
+        robot.leftbackMotor.setPower(-0.3);
+        robot.capball.setPower(0);
+        robot.collector.setPower(0);
+        robot.shooterright.setPower(0);
+        robot.shooterleft.setPower(0);
         sleep(1000);
+        telemetry.addData("LED", true ? "On" : "Off");
+        telemetry.addData("Clear", robot.colorSensor.alpha());
+        telemetry.addData("Red  ", robot.colorSensor.red());
+        telemetry.addData("Green", robot.colorSensor.green());
+        telemetry.addData("Blue ", robot. colorSensor.blue());
+        telemetry.addData("Hue", hsvValues[0]);
+        telemetry.update();
+
+
+
+
     }
 }
