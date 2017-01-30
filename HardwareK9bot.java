@@ -35,8 +35,23 @@ public class HardwareK9bot
     public DcMotor shooterleft = null;
     public DcMotor shooterright = null;
     public DcMotor capball = null;
-  //  private ColorSensor colorSensor;
-  //  private float[] hsv = {0F, 0F,0F};
+    public ColorSensor colorSensor;
+    public Servo left = null;
+    public Servo right = null;
+    public Servo top = null;
+    public Servo hit = null;
+
+    public final static double top_home = 3.4;
+    public final static double right_home = 3.8;
+    public final static double left_home = 3.8;
+
+    public final static double topmin  = 0.20;
+    public final static double topmax = 0.90;
+    public final static double leftmin =0.20;
+    public final static double leftmax = 0.90;
+
+    public final static double rightmin  = 0.20;
+    public final static double rightmax = 0.7;
 
     /* Local OpMode members. */
     HardwareMap hwMap  = null;
@@ -60,8 +75,13 @@ public class HardwareK9bot
         shooterright = hwMap.dcMotor.get("shooterright");
         shooterleft = hwMap.dcMotor.get("shooterleft");
         capball = hwMap.dcMotor.get("capball");
+        left = hwMap.servo.get("left");
+        right = hwMap.servo.get("right");
+        top = hwMap.servo.get("top");
+        hit = hwMap.servo.get("hitter");
 
-       // colorSensor = hwMap.colorSensor.get("color");
+
+        colorSensor = hwMap.colorSensor.get("color");
         leftbackMotor.setPower(0);
         rightBackMotor.setPower(0);
         leftFrontMotor.setPower(0);
@@ -70,6 +90,10 @@ public class HardwareK9bot
         shooterleft.setPower(0);
         shooterright.setPower(0);
         capball.setPower(0);
+        //top.setPosition(top_home);
+        //right.setPosition(right_home);
+       // left.setPosition(left_home);
+
 
 
 
