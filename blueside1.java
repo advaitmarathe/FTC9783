@@ -30,6 +30,14 @@ public class blueside1 extends LinearOpMode {
         telemetry.addData("Status", "Ready to run");    //
         telemetry.update();
         waitForStart();
-
+        robot.leftbackMotor.setPower(-FORWARD_SPEED);
+        robot.rightBackMotor.setPower(FORWARD_SPEED);
+        robot.leftFrontMotor.setPower(-FORWARD_SPEED);
+        robot.rightFrontMotor.setPower(FORWARD_SPEED);
+        robot.capball.setPower(0);
+        robot.collector.setPower(0);
+        robot.shooterright.setPower(0);
+        robot.shooterleft.setPower(0);
+        Thread.sleep(100);
     }
 }
