@@ -1,12 +1,12 @@
 package org.firstinspires.ftc.robotcontroller.external.samples;
 
-        import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-        import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-        import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-        import com.qualcomm.robotcore.hardware.LightSensor;
-        import com.qualcomm.robotcore.util.ElapsedTime;
-        import com.qualcomm.robotcore.hardware.ColorSensor;
-        import android.graphics.Color;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.LightSensor;
+import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.hardware.ColorSensor;
+import android.graphics.Color;
 /**
  * Created by advaitmarathe on 1/29/17.
  */
@@ -38,6 +38,17 @@ public class blueside1 extends LinearOpMode {
         robot.collector.setPower(0);
         robot.shooterright.setPower(0);
         robot.shooterleft.setPower(0);
-        Thread.sleep(100);
+        sleep(100);
+        robot.leftbackMotor.setPower(-TURN_SPEED);
+        robot.rightBackMotor.setPower(-TURN_SPEED);
+        robot.leftFrontMotor.setPower(-TURN_SPEED);
+        robot.rightFrontMotor.setPower(-TURN_SPEED);
+        robot.capball.setPower(0);
+        robot.collector.setPower(0);
+        robot.shooterright.setPower(0);
+        robot.shooterleft.setPower(0);
+        sleep(100);
+        
+        
     }
 }
