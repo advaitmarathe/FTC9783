@@ -59,7 +59,14 @@ import com.qualcomm.robotcore.util.Range;
 public class K9botTeleopTank_Linear extends LinearOpMode {
 
     /* Declare OpMode members. */
-    HardwareK9bot   robot           = new HardwareK9bot();              // Use a K9'shardware
+    HardwareK9bot   robot           = new HardwareK9bot();
+
+    final double    CLAW_SPEED      = 0.0 ;                            // sets rate to move servo
+    final double    ARM_SPEED       = 0.01 ;
+    double top_position = robot.top_home;
+    double right_position = robot.right_home;
+            double left_position = robot.left_home;
+    // sets rate to move servo// Use a K9'shardware
     @Override
     public void runOpMode() {
         double leftback;
@@ -71,13 +78,19 @@ public class K9botTeleopTank_Linear extends LinearOpMode {
         double shooterleft;
         double shooterright;
 
+
         /* Initialize the hardware variables.
          * The init() method of the hardware class does all the work here
          */
         robot.init(hardwareMap);
-
         // Send telemetry message to signify robot waiting;
-        telemetry.addData("Say", "Hello Driver");    //
+        telemetry.addData("Say", "Hello Driver");
+      /*  telemetry.addData("top,", "%.2f",robot.top);
+        telemetry.addData("right,", "%.2f",robot.right);
+        telemetry.addData("left,", "%.2f",robot.left);*/
+
+
+
         telemetry.update();
 
         // Wait for the game to start (driver presses PLAY)
@@ -98,8 +111,8 @@ public class K9botTeleopTank_Linear extends LinearOpMode {
             double capball = -(gamepad2.right_trigger - gamepad2.left_trigger);
             robot.collector.setPower(collector);
             robot.capball.setPower(capball);
-            robot.shooterleft.setPower(shooterleft);
-            robot.shooterright.setPower(shooterright);
+            robot.shooterleft.setPower(shooterleft*0.75);
+            robot.shooterright.setPower(shooterright*0.75);
 
             rightfront = Range.clip(rightfront,-1,1);
             leftfront = Range.clip(leftfront,-1,1);
@@ -109,6 +122,7 @@ public class K9botTeleopTank_Linear extends LinearOpMode {
             shooterleft= Range.clip(shooterleft, -1,1);
             shooterright= Range.clip(shooterright, -1,1);
             capball =  Range.clip(shooterleft, -1,1);
+
 
 
             if(gamepad1.x) {
@@ -127,23 +141,41 @@ public class K9botTeleopTank_Linear extends LinearOpMode {
                 robot.leftFrontMotor.setPower(leftfront);
 
             }
-            // Use gamepad Y & A raise and lower the arm
-          /*  if (gamepad1.a)
-                armPosition += ARM_SPEED;
-            else if (gamepad1.y)
-                armPosition -= ARM_SPEED;
+            if(gamepad1.y)
+            {
+                robot.hit.setPosition(0.2);
+            }
+            else
+            {
+                robot.hit.setPosition(0);
+            }
+
+
 
             // Use gamepad X & B to open and close the claw
-            if (gamepad1.x)
-                clawPosition += CLAW_SPEED;
-            else if (gamepad1.b)
-                clawPosition -= CLAW_SPEED;
+            /*if (gamepad2.right_bumper) {
+                robot.shooterleft.setPower(shooterleft *0.9);
+                robot.shooterright.setPower(shooterright*0.9);
+            }
+            else
+            {
+                robot.shooterleft.setPower(shooterleft);
+                robot.shooterright.setPower(shooterright);
+            }*/
 
+            if (gamepad1.b)
+            {
+                robot.right.setPosition(2.5);
+                robot.left.setPosition(2.5);
+            }
             // Move both servos to new position.
-            armPosition  = Range.clip(armPosition, robot.ARM_MIN_RANGE, robot.ARM_MAX_RANGE);
-            robot.arm.setPosition(armPosition);
-            clawPosition = Range.clip(clawPosition, robot.CLAW_MIN_RANGE, robot.CLAW_MAX_RANGE);
-            robot.claw.setPosition(clawPosition);*/
+            /*top_position  = Range.clip(top_position, robot.topmin, robot.topmax);
+            robot.top.setPosition(top_position);
+            left_position  = Range.clip(left_position, robot.topmin, robot.topmax);
+            robot.left.setPosition(left_position);
+            right_position  = Range.clip(right_position, robot.topmin, robot.topmax);
+            robot.right.setPosition(right_position);*/
+
 
             // Send telemetry message to signify robot running;
             //telemetry.addData("arm",   "%.2f", armPosition);
@@ -152,6 +184,8 @@ public class K9botTeleopTank_Linear extends LinearOpMode {
             telemetry.addData("leftback",  "%.2f", leftback);
           telemetry.addData("rightfront", "%.2f", rightfront);
            telemetry.addData("leftfront", "%.2f", leftfront);
+
+
           telemetry.update();
 
             // Pause for metronome tick.  40 mS each cycle = update 25 times a second.
