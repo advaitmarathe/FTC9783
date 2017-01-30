@@ -1,12 +1,12 @@
 package org.firstinspires.ftc.robotcontroller.external.samples;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.LightSensor;
-import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.hardware.ColorSensor;
-import android.graphics.Color;
+        import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+        import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+        import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+        import com.qualcomm.robotcore.hardware.LightSensor;
+        import com.qualcomm.robotcore.util.ElapsedTime;
+        import com.qualcomm.robotcore.hardware.ColorSensor;
+        import android.graphics.Color;
 /**
  * Created by advaitmarathe on 1/29/17.
  */
@@ -38,17 +38,79 @@ public class blueside1 extends LinearOpMode {
         robot.collector.setPower(0);
         robot.shooterright.setPower(0);
         robot.shooterleft.setPower(0);
-        sleep(100);
-        robot.leftbackMotor.setPower(-TURN_SPEED);
-        robot.rightBackMotor.setPower(-TURN_SPEED);
-        robot.leftFrontMotor.setPower(-TURN_SPEED);
-        robot.rightFrontMotor.setPower(-TURN_SPEED);
+        sleep(800);
+        robot.leftbackMotor.setPower(0);
+        robot.rightBackMotor.setPower(0);
+        robot.rightFrontMotor.setPower(0);
+        robot.leftFrontMotor.setPower(0);
+        robot.capball.setPower(0);
+        robot.collector.setPower(1);
+        robot.shooterright.setPower(-1);
+        robot.shooterleft.setPower(1);
+        Thread.sleep(1500);
+        robot.leftbackMotor.setPower(TURN_SPEED);
+        robot.rightBackMotor.setPower(TURN_SPEED);
+        robot.leftFrontMotor.setPower(TURN_SPEED);
+        robot.rightFrontMotor.setPower(TURN_SPEED);
         robot.capball.setPower(0);
         robot.collector.setPower(0);
         robot.shooterright.setPower(0);
         robot.shooterleft.setPower(0);
-        sleep(100);
-        
-        
+        sleep(2000);
+        robot.leftbackMotor.setPower(FORWARD_SPEED);
+        robot.rightBackMotor.setPower(-FORWARD_SPEED);
+        robot.leftFrontMotor.setPower(FORWARD_SPEED);
+        robot.rightFrontMotor.setPower(-FORWARD_SPEED);
+        robot.capball.setPower(0);
+        robot.collector.setPower(0);
+        robot.shooterright.setPower(0);
+        robot.shooterleft.setPower(0);
+        sleep(1500);
+        robot.leftbackMotor.setPower(0);
+        robot.rightBackMotor.setPower(-FORWARD_SPEED);
+        robot.leftFrontMotor.setPower(0);
+        robot.rightFrontMotor.setPower(-FORWARD_SPEED);
+        robot.capball.setPower(0);
+        robot.collector.setPower(0);
+        robot.shooterright.setPower(0);
+        robot.shooterleft.setPower(0);
+        sleep(1100);
+        robot.leftbackMotor.setPower(FORWARD_SPEED);
+        robot.rightBackMotor.setPower(-FORWARD_SPEED);
+        robot.leftFrontMotor.setPower(FORWARD_SPEED);
+        robot.rightFrontMotor.setPower(-FORWARD_SPEED);
+        robot.capball.setPower(0);
+        robot.collector.setPower(0);
+        robot.shooterright.setPower(0);
+        robot.shooterleft.setPower(0);
+        sleep(1400);
+
+
+
+
+
+
+
+
+
+
+        /*if(robot.colorSensor.red()<=2)
+        {
+            robot.leftbackMotor.setPower(0);
+            robot.rightBackMotor.setPower(0);
+            robot.leftFrontMotor.setPower(0);
+            robot.rightFrontMotor.setPower(0);
+            robot.capball.setPower(0);
+            robot.collector.setPower(0);
+            robot.shooterright.setPower(0);
+            robot.shooterleft.setPower(0);
+            sleep(5000); ;
+            robot.leftbackMotor.setPower(-FORWARD_SPEED);
+            robot.rightBackMotor.setPower(FORWARD_SPEED);
+            robot.leftFrontMotor.setPower(-FORWARD_SPEED);
+            robot.rightFrontMotor.setPower(FORWARD_SPEED);
+            sleep(300);
+
+        }*/
     }
 }
