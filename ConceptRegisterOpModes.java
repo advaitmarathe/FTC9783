@@ -84,6 +84,7 @@ public class ConceptRegisterOpModes
      manager.register("Auto",        PushbotAutoDriveByTime_Linear.class);
     // manager.register("Auto Drive Line",        PushbotAutoDriveToLine_Linear.class);
      manager.register("K9 Telop",               K9botTeleopTank_Linear.class);
+      manager.register("Blue Side", blueside1.class);
 
     // Sensor Samples
     // manager.register("AdaFruit IMU",           SensorAdafruitIMU.class);
@@ -93,7 +94,7 @@ public class ConceptRegisterOpModes
     // manager.register("HT Color",               SensorHTColor.class);
     // manager.register("LEGO Light",             SensorLEGOLight.class);
     // manager.register("LEGO Touch",             SensorLEGOTouch.class);
-    // manager.register("MR Color",               SensorMRColor.class);
+     manager.register("MR Color",               SensorMRColor.class);
     // manager.register("MR Gyro",                SensorMRGyro.class);
     // manager.register("MR IR Seeker",           SensorMRIrSeeker.class);
     // manager.register("MR ODS",                 SensorMROpticalDistance.class);
