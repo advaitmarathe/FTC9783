@@ -41,7 +41,6 @@ public class HardwareK9bot
     public Servo top = null;
     public Servo hit = null;
 
-
     public final static double top_home = 3.4;
     public final static double right_home = 3.8;
     public final static double left_home = 3.8;
@@ -93,20 +92,20 @@ public class HardwareK9bot
         capball.setPower(0);
         //top.setPosition(top_home);
         //right.setPosition(right_home);
-        // left.setPosition(left_home);
+       // left.setPosition(left_home);
 
 
 
 
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
-        leftbackMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        leftFrontMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rightFrontMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rightBackMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftbackMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftFrontMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightFrontMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightBackMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         collector.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        shooterright.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        shooterleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        shooterright.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        shooterleft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         capball.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // Define and initialize ALL installed servos.
